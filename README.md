@@ -4,7 +4,7 @@
 
  > ⚠️ Proprietary — contact lifeoflandry@gmail.com to request a license or reuse permission. Contributions require a signed Contributor License Agreement (see `CLA.md`).
 
- Small, adaptable project template meant to be developed inside a devcontainer. Use this repo as a sandbox for caregiving tools and small web apps; when you add a runtime (Node, Python, etc.) include the appropriate manifest and update this README.
+Small, adaptable project template meant to be developed inside a devcontainer. The current codebase implements a lightweight Python task-management core that can back CLIs, web APIs, or automations. Extend it with additional runtimes (Node, Python, etc.) as you grow the project.
 
  Quick links
  - CLA and contributor instructions: `CLA.md` / `CONTRIBUTING.md`
@@ -12,22 +12,36 @@
  - Devcontainer: `.devcontainer/devcontainer.json`
  - CI workflows: `.github/workflows/`
 
- Getting started (local)
- 1. Clone the repo:
-     ```bash
-     git clone https://github.com/BravelyBaby/psychic-barnacle.git
-     cd psychic-barnacle
-     ```
- 2. Open and run the devcontainer (recommended) or use the host environment.
- 3. Use `Makefile` targets for quick actions:
-     ```bash
-     # build/run (Dockerfile required)
-     make build
-     make run
+## Features
 
-     # run tests (replace with your project's test runner)
-     make test
-     ```
+- `Task` dataclass with validation, ordering, and serialization helpers.
+- `TaskManager` collection with creation, completion, overdue filtering, and aggregate summaries.
+- `pytest` test suite demonstrating common behaviors.
+
+## Getting started (local)
+1. Clone the repo:
+    ```bash
+    git clone https://github.com/BravelyBaby/psychic-barnacle.git
+    cd psychic-barnacle
+    ```
+2. Create a virtual environment (recommended) and install the optional development dependencies:
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate
+    pip install -e .[dev]
+    ```
+3. Run the test suite:
+    ```bash
+    make test
+    ```
+4. Explore the task primitives in a Python shell:
+    ```python
+    >>> from psychic_barnacle import TaskManager
+    >>> manager = TaskManager()
+    >>> manager.create_task("Draft release notes", priority=2)
+    >>> manager.summary()
+    {'total': 1, 'completed': 0, 'pending': 1, 'overdue': 0, 'by_priority': {2: 1}}
+    ```
 
  Devcontainer and environment
  - A minimal devcontainer is included at `.devcontainer/devcontainer.json`. It provides an Ubuntu base image and common CLI tools. Customize it if you add language toolchains (Node, Python, etc.).
@@ -36,11 +50,11 @@
      $BROWSER <url>
      ```
 
- Project layout
- - `src/` — application source (create as needed)
- - `docs/` — documentation and design notes
- - `tests/` — test suites (see `tests/README.md`)
- - `.github/` — PR templates, workflows, and actions
+## Project layout
+- `src/psychic_barnacle/` — Python package with task primitives
+- `tests/` — pytest suite (see `tests/README.md`)
+- `docs/` — documentation and design notes (create as needed)
+- `.github/` — PR templates, workflows, and actions
 
  Common commands
  - Update system packages:
