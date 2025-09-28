@@ -21,4 +21,4 @@ run:
 	fi
 
 test:
-	@echo "No tests configured. Add your language test runner here (e.g., npm test or pytest)"
+	@python -m pytest
