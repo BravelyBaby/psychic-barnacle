@@ -1,0 +1,12 @@
+{
+  "name": "Psychic Barnacle (minimal)",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "customizations": {
+    "vscode": {
+      "extensions": []
+    }
+  },
+  "forwardPorts": [],
+  "postCreateCommand": "echo 'Devcontainer ready'",
+  "remoteUser": "vscode"
+}

@@ -1,0 +1,15 @@
+name: CI (placeholder)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup
+        run: echo "Placeholder CI — customize to run lint/tests/build for your chosen language"
